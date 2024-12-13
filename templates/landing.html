@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Webpage with Collapsible Menu</title>
+  <style>
+    /* General styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    /* Layout container */
+    .content-wrapper {
+      display: flex;
+      margin-top: 60px; /* Offset for fixed navbar height */
+      flex: 1;
+    }
+
+    /* Left menu */
+    .left-menu {
+      width: 20%;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-right: 1px solid #ccc;
+      position: fixed;
+      left: -100%; /* Hidden by default */
+      top: 60px;
+      height: calc(100% - 60px); /* Fill height minus navbar */
+      transition: left 0.3s ease; /* Smooth slide-in effect */
+    }
+
+    .left-menu.show {
+      left: 0; /* Make visible */
+    }
+
+    /* Main content */
+    .main-content {
+      flex: 1;
+      padding: 15px;
+      background-color: #fff;
+      margin-left: 20%; /* Adjust for left-menu width */
+    }
+
+    /* Right panel */
+    .right-panel {
+      width: 20%;
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-left: 1px solid #ccc;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    /* Toggle Button */
+    .menu-toggle {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <button class="menu-toggle">Toggle Menu</button>
+    Fixed Navbar
+  </div>
+
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Left menu -->
+    <div class="left-menu">
+      <h3>Left Menu</h3>
+      <ul>
+        <li>Menu Item 1</li>
+        <li>Menu Item 2</li>
+        <li>Menu Item 3</li>
+      </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <h2>Main Content Area</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+    </div>
+
+    <!-- Right panel -->
+    <div class="right-panel">
+      <h3>Right Panel</h3>
+      <p>Additional information or widgets can go here.</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Footer Section
+  </div>
+
+  <script>
+    // Collapsible menu toggle
+    const toggleButton = document.querySelector('.menu-toggle');
+    const leftMenu = document.querySelector('.left-menu');
+    toggleButton.addEventListener('click', () => {
+      leftMenu.classList.toggle('show');
+    });
+
+    // Responsive scaling function
+    function adjustPageSize() {
+      const width = window.innerWidth;
+
+      if (width >= 992 && width <= 1600) {
+        document.body.style.transform = 'scale(0.9)';
+      } else if (width >= 700 && width <= 767) {
+        document.body.style.transform = 'scale(0.8)';
+      } else if (width >= 600 && width < 700) {
+        document.body.style.transform = 'scale(0.75)';
+      } else if (width <= 600) {
+        document.body.style.transform = 'scale(0.5)';
+      } else {
+        document.body.style.transform = 'scale(1)'; // Default size
+      }
+    }
+
+    window.addEventListener('resize', adjustPageSize);
+    adjustPageSize(); // Initial call
+  </script>
+</body>
+</html>
